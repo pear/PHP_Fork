@@ -44,11 +44,11 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
   <active>no</active>
  </lead>
 
- <date>2005-03-24</date>
+ <date>2008-10-26</date>
 
  <version>
-  <release>0.3.0</release>
-  <api>0.3.0</api>
+  <release>0.3.1</release>
+  <api>0.3.1</api>
  </version>
 
  <stability>
@@ -59,11 +59,9 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
  <license uri="http://www.php.net/license">PHP License</license>
 
  <notes>
-* Added isActive() facilty to check if the process is into its run() method.
-* Added IPC segments cleanup after the stop() method is called
-  (this totally free up detached shared memory as revealed by the ipcs command).
-* Added a complex usage example (examples/browser_pool.php).
-* Some minor changes into example scripts to accomplish php5 syntax rules.
+QA release:
+* Update to package.xml version 2
+* This fixes bug #9472: package not installable
  </notes>
 
  <contents>
@@ -102,6 +100,27 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
  <phprelease />
 
  <changelog>
+
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-03-24</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+* Added isActive() facilty to check if the process is into its run() method.
+* Added IPC segments cleanup after the stop() method is called
+  (this totally free up detached shared memory as revealed by the ipcs command).
+* Added a complex usage example (examples/browser_pool.php).
+* Some minor changes into example scripts to accomplish php5 syntax rules.
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>0.2.0</release>
@@ -117,6 +136,7 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
     Added dependancies into package.xml (bug #2758)
    </notes>
   </release>
+
   <release>
    <version>
     <release>0.1.0</release>
@@ -132,5 +152,6 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
     Initial release
    </notes>
   </release>
+
  </changelog>
 </package>
