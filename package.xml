@@ -21,6 +21,7 @@ $value must be a variable or a serializable object.
 Resources (db connections, streams, etc.) cannot be serialized and so they're not correctly handled.
 Requires PHP build with --enable-cli --with-pcntl --enable-shmop.
 Only runs on *NIX systems, because Windows lacks of the pcntl ext.
+@example browser_pool.php an interactive tool to perform multiple cuncurrent request over an URL.
 @example simple_controller.php shows how to attach a controller to started pseudo-threads.
 @example exec_methods.php shows a workaround to execute methods into the child process.
 @example passing_vars.php shows variable exchange between the parent process and started pseudo-threads.
@@ -34,18 +35,23 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
     </maintainer>
   </maintainers>
   <release>
-    <version>0.2.0</version>
-    <date>2005-01-04</date>
+    <version>0.3.0</version>
+    <date>2005-03-24</date>
     <license>PHP License</license>
     <state>beta</state>
-    <notes>Added dependancies into package.xml (bug #2758)</notes>
+    <notes>Added isActive() facilty to check if the process is into its run() method.
+           Added IPC segments cleanup after the stop() method is called (this totally free up detached shared memory as revealed by the ipcs command).
+	   Added a complex usage example (examples/browser_pool.php).
+	   Some minor changes into example scripts to accomplish php5 syntax rules.</notes>
     <deps>
       <dep type="ext" rel="has">pcntl</dep>
       <dep type="ext" rel="has">shmop</dep>
       <dep type="ext" rel="has">posix</dep>
+      <dep type="sapi" rel="has">cli</dep>
     </deps>
     <provides type="class" name="PHP_Fork" />
     <provides type="function" name="PHP_Fork::isRunning" />
+    <provides type="function" name="PHP_Fork::isActive" />
     <provides type="function" name="PHP_Fork::setVariable" />
     <provides type="function" name="PHP_Fork::getVariable" />
     <provides type="function" name="PHP_Fork::setAlive" />
@@ -62,12 +68,21 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
       <file role="doc" baseinstalldir="PHP" name="examples/exec_methods.php"/>
       <file role="doc" baseinstalldir="PHP" name="examples/passing_vars.php"/>
       <file role="doc" baseinstalldir="PHP" name="examples/simple_controller.php"/>
+      <file role="doc" baseinstalldir="PHP" name="examples/browser_pool.php"/>
       <file role="php" baseinstalldir="PHP" name="Fork.php"/>
     </filelist>
   </release>
   <changelog>
     <release>
-      <version>0.1</version>
+      <version>0.2.0</version>
+      <date>2005-01-04</date>
+      <license>PHP License</license>
+      <state>beta</state>
+      <notes>Added dependancies into package.xml (bug #2758)
+</notes>
+    </release>
+    <release>
+      <version>0.1.0</version>
       <date>2004-03-17</date>
       <license>PHP License</license>
       <state>beta</state>

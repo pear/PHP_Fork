@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 4 - 5                                                       |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -15,7 +15,6 @@
 // +----------------------------------------------------------------------+
 // | Author: Luca Mariano <luca.mariano@email.it>                         |
 // +----------------------------------------------------------------------+
-
 // $Id: Fork.php
 
 /**
@@ -238,6 +237,21 @@ class PHP_Fork {
     }
 
     /**
+     * PHP_Fork::isActive()
+     *
+     * Check if the pseudo-thread is actually doing its job
+     * as defined into its run() method.
+     * This is set to FALSE before entering into the child run(),
+     * It become TRUE after run() exit.
+     *
+     * @return boolean true is the child is actually into its run() cycle
+     */    
+    function isActive()
+    {
+        return !$this->getVariable('_has_finished');
+    }
+    
+    /**
      * PHP_Fork::setVariable()
      *
      * Set a variable into the shared memory segment so that it can accessed
@@ -425,18 +439,21 @@ class PHP_Fork {
         if (!$this->_ipc_is_ok) {
         	 die ('Fatal error, unable to create SHM segments for process communications');
 	         }
-
+	
         pcntl_signal(SIGCHLD, SIG_IGN);
-
+// 	pcntl_signal(SIGALRM, SIG_IGN);
+	
         $pid = pcntl_fork();
         if ($pid == 0) {
             // this is the child
             $this->_isChild = true;
             sleep(1);
-
+    	    
             // install the signal handler
             pcntl_signal(SIGUSR1, array($this, "_sig_handler"));
-
+/*	    pcntl_signal(SIGALRM, array($this, "_sig_handler")); 
+	    pcntl_alarm(1);                    	*/
+	    
             // if requested, change process identity
             if ($this->_guid != 0)
                 posix_setgid($this->_guid);
@@ -444,7 +461,11 @@ class PHP_Fork {
             if ($this->_puid != 0)
                 posix_setuid($this->_puid);
 
+	    $this->setVariable('_has_finished', false);		
+       	    
             $this->run();
+	    
+	    $this->setVariable('_has_finished', true);	    
             // Added 21/Oct/2003: destroy the child after run() execution
             // needed to avoid unuseful child processes after execution
             exit(0);
@@ -496,7 +517,9 @@ class PHP_Fork {
 
     function _cleanThreadContext()
     {
-        @shmop_close($this->_internal_ipc_key);
+        @shmop_delete($this->_internal_ipc_key);
+        @shmop_delete($this->_internal_sem_key);        
+	@shmop_close($this->_internal_ipc_key);
         @shmop_close($this->_internal_sem_key);
         $this->_running = false;
         unset($this->_pid);
@@ -546,6 +569,14 @@ class PHP_Fork {
                         break;
                 }
                 break;
+	    case SIGALRM :
+			$this->_internal_ipc_array['_pingTime'] = time();
+        		$this->_writeToIPCsegment();	
+			//echo $this->getVariable('_pingTime');
+			                        
+// 			pcntl_alarm(1);
+		break;			
+
             default:
                 // handle all other signals
         }
@@ -622,7 +653,7 @@ class PHP_Fork {
     {
         $tmp_file_key = "/tmp/" . md5($this->getName()) . ".shm";
         touch ($tmp_file_key);
-        $shm_key = ftok($tmp_file_key, 't');
+        $shm_key = ftok($tmp_file_key, 'a');
         if ($shm_key == -1)
             die ("Fatal exception creating SHM segment (ftok)");
 
@@ -643,13 +674,15 @@ class PHP_Fork {
     {
         $tmp_file_key = "/tmp/" . md5($this->getName()) . ".sem";
         touch ($tmp_file_key);
-        $sem_key = ftok($tmp_file_key, 't');
+        $sem_key = ftok($tmp_file_key, 'a');
         if ($sem_key == -1)
             die ("Fatal exception creating semaphore (ftok)");
-        $this->_internal_sem_key = shmop_open($sem_key, "c", 0644, 10);
+        $this->_internal_sem_key = @shmop_open($sem_key, "c", 0644, 10);
         if (!$this->_internal_sem_key) {
             return false;
         }
         return true;
     }
 }
+
+
