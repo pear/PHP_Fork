@@ -34,11 +34,16 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
     </maintainer>
   </maintainers>
   <release>
-    <version>0.1</version>
-    <date>2004-03-17</date>
+    <version>0.2.0</version>
+    <date>2005-01-04</date>
     <license>PHP License</license>
     <state>beta</state>
-    <notes>Initial release</notes>
+    <notes>Added dependancies into package.xml (bug #2758)</notes>
+    <deps>
+      <dep type="ext" rel="has">pcntl</dep>
+      <dep type="ext" rel="has">shmop</dep>
+      <dep type="ext" rel="has">posix</dep>
+    </deps>
     <provides type="class" name="PHP_Fork" />
     <provides type="function" name="PHP_Fork::isRunning" />
     <provides type="function" name="PHP_Fork::setVariable" />
@@ -67,6 +72,7 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
       <license>PHP License</license>
       <state>beta</state>
       <notes>Initial release
+
 </notes>
     </release>
   </changelog>
