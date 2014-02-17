@@ -1,0 +1,28 @@
+{
+    "authors": [
+        {
+            "email": "luca.mariano@email.it",
+            "name": "Luca Mariano",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    },
+    "description": "More info available on: http://pear.php.net/package/PHP_Fork",
+    "license": "PHP License",
+    "name": "pear/php_fork",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=PHP_Fork",
+        "source": "https://github.com/pear/PHP_Fork"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
