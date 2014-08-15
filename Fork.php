@@ -463,8 +463,13 @@ class PHP_Fork {
 
 	    $this->setVariable('_has_finished', false);		
        	    
-            $this->run();
-	    
+	    if(func_num_args() > 0) {
+	    	$args = func_get_args();
+                call_user_func_array(array($this, 'run'), $args);
+	    } else {
+                $this->run();
+	    }
+
 	    $this->setVariable('_has_finished', true);	    
             // Added 21/Oct/2003: destroy the child after run() execution
             // needed to avoid unuseful child processes after execution
