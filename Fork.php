@@ -174,7 +174,7 @@ class PHP_Fork {
     var $_running;
 
     /**
-     * PHP_Fork::PHP_Fork()
+     * PHP_Fork::__construct()
      * Allocates a new pseudo-thread object and set its name to $name.
      * Optionally, set a PUID, a GUID and a UMASK for the child process.
      * This also initialize Shared Memory Segments for process communications.
