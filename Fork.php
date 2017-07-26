@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
 // +----------------------------------------------------------------------+
-// | PHP Version 4 - 5                                                       |
+// | PHP Version 4 - 7                                                    |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -37,7 +37,7 @@ define ('PHP_FORK_RETURN_METHOD', 	-2);
  *  class executeThread extends PHP_Fork {
  *     var $counter;
  *
- *     function executeThread($name)
+ *     function __construct($name)
  *     {
  *         $this->PHP_Fork($name);
  *         $this->counter = 0;
@@ -198,7 +198,7 @@ class PHP_Fork {
      * @access public
      * @return bool true if the Shared Memory Segments are OK, false otherwise.<br>Notice that only if shared mem is ok the process will be forked.
      */
-    function PHP_Fork($name, $puid = 0, $guid = 0, $umask = -1)
+    function __construct($name, $puid = 0, $guid = 0, $umask = -1)
     {
         $this->_running = false;
 

@@ -40,7 +40,7 @@ define ("CTRL_POLLING_INTERVAL", 5);
 class executeThread extends PHP_Fork {
     var $counter;
 
-    function executeThread($name)
+    function __construct($name)
     {
         $this->PHP_Fork($name);
         $this->counter = 0;
@@ -91,7 +91,7 @@ class controllerThread extends PHP_Fork {
      * @param  $interval
      * @return
      */
-    function controllerThread($name, &$executeThreadPool, $maxIdleTime = 60, $interval = 60)
+    function __construct($name, &$executeThreadPool, $maxIdleTime = 60, $interval = 60)
     {
         $this->PHP_Fork($name);
         $this->_sleepInt = $interval;

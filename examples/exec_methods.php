@@ -47,7 +47,7 @@ declare (ticks = 1);
  * and to the child (and will be executed into the relative process)
  */
 class executeThread extends PHP_Fork {
-    function executeThread($name)
+    function __construct($name)
     {
         $this->PHP_Fork($name);
         $GLOBALS["counter"] = 0;
