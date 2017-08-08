@@ -32,11 +32,10 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
   <email>luca.mariano@email.it</email>
   <active>no</active>
  </lead>
- <date>2010-10-25</date>
- <time>23:32:53</time>
+ <date>2017-08-07</date>
  <version>
-  <release>0.3.2</release>
-  <api>0.3.1</api>
+  <release>0.4.0</release>
+  <api>0.4.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -44,8 +43,8 @@ Only runs on *NIX systems, because Windows lacks of the pcntl ext.
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
-Automatically built QA release
-Bug #9472 package not installable - cweiske
+Bumped PHP minimum to 5.0.0
+PR #3 Renamed constructors to __construct
  </notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">
@@ -60,7 +59,7 @@ Bug #9472 package not installable - cweiske
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>5.0.0</min>
    </php>
    <pearinstaller>
     <min>1.4.0b1</min>
@@ -141,6 +140,22 @@ Added dependancies into package.xml (bug #2758)
    <notes>
 Automatically built QA release
 Bug #9472 package not installable - cweiske
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.4.0</release>
+    <api>0.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2017-08-07</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+Bumped PHP minimum to 5.0.0
+PR #3 Renamed constructors to __construct
    </notes>
   </release>
  </changelog>
