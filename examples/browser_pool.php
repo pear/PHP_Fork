@@ -49,7 +49,7 @@ declare (ticks = 1);
 class executeThread extends PHP_Fork {
         var $request;
 
-        function executeThread($name)
+        function __construct($name)
         {
                 $this->PHP_Fork($name);
         }

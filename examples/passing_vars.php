@@ -32,7 +32,7 @@ define ("NUM_THREAD", 2);
 class executeThread extends PHP_Fork {
     var $counter;
 
-    function executeThread($name)
+    function __construct($name)
     {
         $this->PHP_Fork($name);
         $this->counter = 0;
