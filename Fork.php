@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
 // +----------------------------------------------------------------------+
-// | PHP Version 4 - 7                                                    |
+// | PHP Version 5 - 7                                                    |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -39,7 +39,7 @@ define ('PHP_FORK_RETURN_METHOD', 	-2);
  *
  *     function __construct($name)
  *     {
- *         $this->PHP_Fork($name);
+           parent::__construct($name);
  *         $this->counter = 0;
  *     }
  *

@@ -34,7 +34,7 @@ class executeThread extends PHP_Fork {
 
     function __construct($name)
     {
-        $this->PHP_Fork($name);
+        parent::__construct($name);
         $this->counter = 0;
     }
 

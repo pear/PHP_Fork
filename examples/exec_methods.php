@@ -49,7 +49,7 @@ declare (ticks = 1);
 class executeThread extends PHP_Fork {
     function __construct($name)
     {
-        $this->PHP_Fork($name);
+        parent::__construct($name);
         $GLOBALS["counter"] = 0;
     }
 

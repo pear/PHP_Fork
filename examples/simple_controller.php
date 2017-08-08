@@ -42,7 +42,7 @@ class executeThread extends PHP_Fork {
 
     function __construct($name)
     {
-        $this->PHP_Fork($name);
+        parent::__construct($name);
         $this->counter = 0;
     }
 
@@ -93,7 +93,7 @@ class controllerThread extends PHP_Fork {
      */
     function __construct($name, &$executeThreadPool, $maxIdleTime = 60, $interval = 60)
     {
-        $this->PHP_Fork($name);
+        parent::__construct($name);
         $this->_sleepInt = $interval;
         $this->_executeThreadPool = &$executeThreadPool;
         $this->_maxIdleTime = $maxIdleTime;
